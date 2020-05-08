@@ -28,6 +28,9 @@ Se opção 9 for selecionada, o programa apresenta a matrícula do funcionário mais
 Se a opção 10 for selecionada, o programa apresenta a matrícula do funcionário mais jovem.
 Se a opção 11 for selecionada, o programa reinicializa a lista.
 Se a opção 12 for selecionada, o programa diz quantos funcionários existem na empresa e reapresenta o menu. A opção 99 encerra.
+Se a opção 13 for selecionada, o programa mostra em qual setor está lotado o funcionário mais idoso da empresa, e então reapresenta o menu.
+Se a opção 14 for selecionada, o programa diz se existe ou não algum número de matrícula repetido na lista, e então reapresenta o menu.
+Se a opção 15 for selecionada, o programa diz quantos funcionários estão lotados em cada um dos setor da empresa, e então reapresenta o menu.
 OBS.: Construa um método para cada uma das opções do menu. Somente os métodos correspondentes as opções 3 e 4 do menu, além do método main(), podem fazer I/O.
 */
 
@@ -47,12 +50,12 @@ public class Main {
                     matrp = Integer.parseInt(JOptionPane.showInputDialog("Dígite a matricula do funcionário."));
                     int ida = Integer.parseInt(JOptionPane.showInputDialog("Dígite a idade do funcionário."));
                     int set = Integer.parseInt(JOptionPane.showInputDialog("Dígite o código do setor de lotação."));
-                    fifo.inserir(matrp, ida, set);
+                    fifo.Inserir(matrp, ida, set);
 
                     opcao = lerOpcaoDoMenu();
                     break;
                 case 2: {
-                    aux = fifo.retirar();
+                    aux = fifo.Retirar();
                     if (aux == -99)
                         System.out.println("A lista está vazia");
                     else
@@ -62,13 +65,13 @@ public class Main {
                     break;
                 }
                 case 3: {
-                    fifo.mostrar();
+                    fifo.Mostrar();
 
                     opcao = lerOpcaoDoMenu();
                     break;
                 }
                 case 4: {
-                    fifo.mostrarInverso();
+                    fifo.MostrarInverso();
 
                     opcao = lerOpcaoDoMenu();
                     break;
@@ -76,7 +79,7 @@ public class Main {
                 case 5: {
                     matrp = Integer.parseInt(JOptionPane.showInputDialog("Dígite a matrícula do funcionário que desejas localizar."));
 
-                    if (fifo.procuraMatricula(matrp) == -1)
+                    if (fifo.ProcuraMatricula(matrp) == -1)
                         System.out.println("Não foi possível localizar a matrícula " + matrp);
                     else
                         System.out.println("Foi localizado a matrícula: " + matrp);
@@ -86,7 +89,7 @@ public class Main {
                 }
                 case 6: {
                     matrp = Integer.parseInt(JOptionPane.showInputDialog("Dígite a matrícula do funcionário que desejas localizar o setor."));
-                    int resultado = fifo.procuraSetor(matrp);
+                    int resultado = fifo.ProcuraSetor(matrp);
 
                     if (resultado == -1)
                         System.out.println("Não foi possível localizar a matrícula " + matrp);
@@ -99,7 +102,7 @@ public class Main {
 
                 case 7: {
                     matrp = Integer.parseInt(JOptionPane.showInputDialog("Dígite a matrícula do funcionário que desejas saber a idade."));
-                    int resultado = fifo.procuraIdade(matrp);
+                    int resultado = fifo.ProcuraIdade(matrp);
 
                     if (resultado == -1)
                         System.out.println("Não foi possível localizar a matrícula " + matrp);
@@ -111,31 +114,52 @@ public class Main {
                 }
 
                 case 8: {
-                    System.out.println("A média de idade dos funcionários é: " + fifo.media());
+                    System.out.println("A média de idade dos funcionários é: " + fifo.Media());
 
                     opcao = lerOpcaoDoMenu();
                     break;
                 }
                 case 9: {
-                    System.out.println("A matrícula do funcionário mais velho é: " + fifo.idoso());
+                    System.out.println("A matrícula do funcionário mais velho é: " + fifo.Idoso());
 
                     opcao = lerOpcaoDoMenu();
                     break;
                 }
                 case 10: {
-                    System.out.println("A matrícula do funcionário mais jovem é: " + fifo.jovem());
+                    System.out.println("A matrícula do funcionário mais jovem é: " + fifo.Jovem());
 
                     opcao = lerOpcaoDoMenu();
                     break;
                 }
                 case 11: {
-                    fifo.limpar();
+                    fifo.Limpar();
 
                     opcao = lerOpcaoDoMenu();
                     break;
                 }
                 case 12: {
-                    System.out.println("Existe " + fifo.contar() + " funcionários nessa lista");
+                    System.out.println("Existe " + fifo.Contar() + " funcionários nessa lista");
+
+                    opcao = lerOpcaoDoMenu();
+                    break;
+                }
+                case 13: {
+                    System.out.println("o funcionário mais idoso está lotado no setor " + fifo.SetorIdoso());
+
+                    opcao = lerOpcaoDoMenu();
+                    break;
+                }
+                case 14: {
+                    if (fifo.Repetido())
+                        System.out.println("Existem matrículas repetidas nesta lista");
+                    else
+                        System.out.println("Não Existem matrículas repetidas nesta lista");
+
+                    opcao = lerOpcaoDoMenu();
+                    break;
+                }
+                case 15: {
+                    fifo.Lotados();
 
                     opcao = lerOpcaoDoMenu();
                     break;
@@ -158,6 +182,9 @@ public class Main {
         menu += "\n[10] - Mais jovem ";
         menu += "\n[11] - Limpar ";
         menu += "\n[12] - Quantos ";
+        menu += "\n[13] - Setor mais idoso ";
+        menu += "\n[14] - Matriculas repetidas ";
+        menu += "\n[15] - Qtd nos setores ";
         menu += "\n[99] - Vazar ";
         menu += "\n[ ------------------------- ]";
         menu += "\nInforme sua opção: ";
